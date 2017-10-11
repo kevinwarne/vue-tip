@@ -1,6 +1,5 @@
 <template>
   <div id = 'demo'>
-
     <div class = 'example-text'>
       Here is an example of a tooltip with absolute placement.
     </div>
@@ -67,7 +66,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

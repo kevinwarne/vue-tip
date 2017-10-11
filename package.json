@@ -11,7 +11,7 @@
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "build:demo": "node build/build-demo.js",
-    "pre-gh-pages": "git clone git@github.com:kevinwarne/vue-tip.git --branch gh-pages public",
+    "pre-gh-pages": "git clone kevinwarne@github.com:kevinwarne/vue-tip.git --branch gh-pages public",
     "gh-pages": "rm -rf public/* && npm run build:demo && cd public && git add --all && git commit -m \"Pages updated at $(date)\" && git push && cd ..",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
