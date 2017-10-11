@@ -1,6 +1,6 @@
 {
   "name": "vue-tip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue component to aid in creating dynamic html composed tooltips.",
   "author": "Kevin Warne <kjw988@gmail.com>",
   "jsnext:main": "src/index.js",
@@ -18,8 +18,7 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "vue": "^2.4.2",
     "babel-core": "^6.22.1",
