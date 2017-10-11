@@ -1,0 +1,148 @@
+.vt {
+  $accent: #555;
+
+  @mixin transform ($x, $y) {
+    -webkit-transform: translate3d(0,#{$y},0) translateX(#{$x});
+    transform: translate3d(0,#{$y},0) translateX(#{$x});
+  }
+
+  position: relative;
+
+  .vt-tip,
+  .vt-arrow {
+    z-index: 9999;
+    opacity: 1;
+    cursor: default;
+    position: absolute;
+
+    -webkit-transition: opacity 0.2s, -webkit-transform 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .vt-tip {
+    text-align: left;
+    box-shadow: 0 0px 6px rgba(48,54,61,0.25);
+    background: white;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+  }
+
+  .vt-arrow {
+    left: 50%;
+    border: solid;
+    height: 0;
+    width: 0;
+    border-width: 8px;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    @include transform(-50%, 0px);
+  }
+
+  .vt-arrow-fade-enter,
+  .vt-arrow-fade-leave-to,
+  .vt-tip-fade-enter,
+  .vt-tip-fade-leave-to {
+    opacity: 0;
+  }
+
+  .vt-tip-anchor {
+    pointer-events: none;
+  }
+
+  // position styles
+
+  // top styles
+
+  &.vt-top {
+    .vt-tip,
+    .vt-arrow {
+      bottom: 100%;
+    }
+
+    .vt-tip {
+      margin-bottom: 15px;
+      border-bottom: 3px solid $accent;
+    }
+
+    .vt-arrow {
+      border-top-color: $accent;
+    }
+
+    .vt-arrow-fade-enter,
+    .vt-arrow-fade-leave-to {
+      @include transform(-50%, -10px);
+    }
+
+    &.vt-left,
+    &.vt-right {
+      .vt-tip-fade-enter,
+      .vt-tip-fade-leave-to {
+        @include transform(0%, -10px);
+      }
+    }
+
+    &.vt-center {
+      .vt-tip-fade-enter,
+      .vt-tip-fade-leave-to {
+        @include transform(-50%, -10px);
+      }
+    }
+  }
+
+  // bottom styles
+
+  &.vt-bottom {
+    .vt-tip,
+    .vt-arrow {
+      top: 100%;
+    }
+
+    .vt-tip {
+      margin-top: 15px;
+      border-top: 3px solid $accent;
+    }
+
+    .vt-arrow {
+      border-bottom-color: $accent;
+    }
+
+    .vt-arrow-fade-enter,
+    .vt-arrow-fade-leave-to {
+      @include transform(-50%, 10px);
+    }
+
+    &.vt-left,
+    &.vt-right {
+      .vt-tip-fade-enter,
+      .vt-tip-fade-leave-to {
+        @include transform(0%, 10px);
+      }
+    }
+
+    &.vt-center {
+      .vt-tip-fade-enter,
+      .vt-tip-fade-leave-to {
+        @include transform(-50%, 10px);
+      }
+    }
+  }
+
+  // horizontal styles
+
+  &.vt-left .vt-tip {
+    right: -10px;
+    @include transform(0%, 0);
+  }
+
+  &.vt-center .vt-tip {
+    left: 50%;
+    @include transform(-50%, 0);
+  }
+
+  &.vt-right .vt-tip {
+    left: -10px;
+    @include transform(0%, 0);
+  }
+}
