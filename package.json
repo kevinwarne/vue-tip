@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Vue component to aid in creating dynamic html composed tooltips.",
   "author": "Kevin Warne <kjw988@gmail.com>",
-  "private": true,
   "jsnext:main": "src/index.js",
   "module": "dist/vue-tip.min.js",
   "main": "dist/vue-tip.min.js",
