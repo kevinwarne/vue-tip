@@ -10,7 +10,6 @@
 
   .vt-tip,
   .vt-arrow {
-    z-index: 9999;
     opacity: 1;
     cursor: default;
     position: absolute;
@@ -32,11 +31,11 @@
     border: solid;
     height: 0;
     width: 0;
-    border-width: 8px;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    border-top-color: transparent;
+    border: 8px solid transparent;
+    // border-left-color: transparent;
+    // border-right-color: transparent;
+    // border-bottom-color: transparent;
+    // border-top-color: transparent;
     @include transform(-50%, 0px);
   }
 
@@ -49,6 +48,7 @@
 
   .vt-tip-anchor {
     pointer-events: none;
+    z-index: 99999;
   }
 
   // position styles
@@ -67,7 +67,7 @@
     }
 
     .vt-arrow {
-      border-top-color: $accent;
+      border-top: 8px solid $accent;
     }
 
     .vt-arrow-fade-enter,
@@ -105,7 +105,7 @@
     }
 
     .vt-arrow {
-      border-bottom-color: $accent;
+      border-bottom: 8px solid $accent;
     }
 
     .vt-arrow-fade-enter,
