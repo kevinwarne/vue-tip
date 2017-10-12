@@ -3,6 +3,8 @@
     :class = 'classes'
     @mouseenter = 'mouseEnter'
     @mouseleave = 'mouseLeave'
+    @touchstart = 'touchStart'
+    @touchend = 'touchEnd'
   >
     <span class = 'vt-trigger' ref = 'trigger'>
       <slot></slot>
@@ -12,7 +14,7 @@
         <span
           class = 'vt-tip'
           :style = 'tipStyle'
-           v-if = 'hovered'
+           v-if = 'active'
         >
           <span class = 'vt-content'>
             <slot name = 'tip'></slot>
@@ -22,7 +24,7 @@
       <transition name = 'vt-arrow-fade'>
         <span
           class = 'vt-arrow'
-          v-if = 'hovered'
+          v-if = 'active'
         ></span>
       </transition>
     </div>
@@ -71,8 +73,13 @@
 
     data () {
       return {
+        // mouse coords
+        x: 0,
+        y: 0,
         // keep track of hovered state
         hovered: false,
+        // keep track of touched state
+        touched: false,
         // keep track of position 'auto' placements based on cursor position
         // when entering / exiting the trigger.
         autoVertical: null,
@@ -122,7 +129,7 @@
 
       // position tooltip anchor accordingly
       anchorStyle () {
-        if (this.rect && this.hovered) {
+        if (this.rect && (this.active)) {
           if (this.fixed) {
             return {
               width: this.rect.width + 'px',
@@ -145,20 +152,24 @@
             display: 'none'
           }
         }
+      },
+
+      active () {
+        return this.hovered || this.touched
       }
     },
 
     methods: {
-      updateDimensions (e) {
-        if (e.clientY > document.documentElement.clientHeight / 2) {
+      updateDimensions (touched = false) {
+        if (this.y > document.documentElement.clientHeight / 2 || touched) {
           this.autoVertical = 'top'
         } else {
           this.autoVertical = 'bottom'
         }
 
-        if (e.clientX < document.documentElement.clientWidth * (1 / 3)) {
+        if (this.x < document.documentElement.clientWidth * (1 / 3)) {
           this.autoHorizontal = 'right'
-        } else if (e.clientX > document.documentElement.clientWidth * (2 / 3)) {
+        } else if (this.x > document.documentElement.clientWidth * (2 / 3)) {
           this.autoHorizontal = 'left'
         } else {
           this.autoHorizontal = 'center'
@@ -168,12 +179,25 @@
       },
 
       mouseEnter (e) {
-        this.updateDimensions(e)
+        this.x = e.clientX
+        this.y = e.clientY
+        this.updateDimensions()
         this.hovered = true
       },
 
       mouseLeave () {
         this.hovered = false
+      },
+
+      touchStart (e) {
+        this.x = e.touches[0].clientX
+        this.y = e.touches[0].clientY
+        this.updateDimensions(true)
+        this.touched = true
+      },
+
+      touchEnd () {
+        this.touched = false
       }
     }
   }

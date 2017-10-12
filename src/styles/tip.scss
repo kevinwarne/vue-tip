@@ -1,5 +1,7 @@
 .vt {
   $accent: #555;
+  user-select: none;
+  -webkit-user-select: none;
 
   @mixin transform ($x, $y) {
     -webkit-transform: translate3d(0,#{$y},0) translateX(#{$x});
